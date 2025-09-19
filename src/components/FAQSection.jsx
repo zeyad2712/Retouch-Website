@@ -1,8 +1,52 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './FAQSection.css';
 
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState(0);
+  const [isVisible, setIsVisible] = useState(false);
+  const [animatedFAQs, setAnimatedFAQs] = useState([]);
+  const sectionRef = useRef(null);
+
+  // Intersection Observer for scroll animations
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !isVisible) {
+            console.log('FAQSection is now visible - starting animations');
+            setIsVisible(true);
+            animateFAQs();
+          }
+        });
+      },
+      { 
+        threshold: 0.2, 
+        rootMargin: '0px 0px -50px 0px' 
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
+  }, [isVisible]);
+
+  // Animate FAQs with staggered timing
+  const animateFAQs = () => {
+    console.log('Starting FAQ animations...');
+    const faqIndices = [0, 1, 2, 3]; // FAQ indices
+    faqIndices.forEach((index, i) => {
+      setTimeout(() => {
+        console.log(`Animating FAQ ${index}`);
+        setAnimatedFAQs(prev => [...prev, index]);
+      }, i * 150); // 150ms delay between each FAQ
+    });
+  };
   
   const faqs = [
     {
@@ -28,9 +72,9 @@ const FAQSection = () => {
   };
 
   return (
-    <section className="faq-section">
+    <section className="faq-section" ref={sectionRef}>
       <div className="faq-container">
-        <div className="faq-header">
+        <div className={`faq-header ${isVisible ? 'animate-in' : ''}`}>
           <h2 className="faq-title">Frequently Asked Questions</h2>
           <p className="faq-description">
             Got questions? We've got answers. Here are some of the most common questions we get from potential clients.
@@ -39,7 +83,11 @@ const FAQSection = () => {
         
         <div className="faq-list">
           {faqs.map((faq, index) => (
-            <div key={index} className={`faq-item ${openIndex === index ? 'open' : ''}`}>
+            <div 
+              key={index} 
+              className={`faq-item ${openIndex === index ? 'open' : ''} ${animatedFAQs.includes(index) ? 'animate-in' : ''}`}
+              style={{ animationDelay: `${index * 0.1}s` }}
+            >
               <button 
                 className="faq-question"
                 onClick={() => toggleFAQ(index)}
@@ -47,8 +95,8 @@ const FAQSection = () => {
                 <span className="question-text">{faq.question}</span>
                 <svg 
                   className={`faq-icon ${openIndex === index ? 'open' : ''}`}
-                  width="20" 
-                  height="20" 
+                  width="30" 
+                  height="30" 
                   viewBox="0 0 24 24" 
                   fill="none"
                 >
