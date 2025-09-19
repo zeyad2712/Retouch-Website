@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import './EventsSection.css';
+import './css/EventsSection.css';
 
 const EventsSection = () => {
   const [isVisible, setIsVisible] = useState(false);

@@ -1,5 +1,5 @@
 import { React, useState, useEffect, useRef } from 'react';
-import './WhatWeDoSection.css';
+import './css/WhatWeDoSection.css';
 
 const WhatWeDoSection = () => {
   const [isVisible, setIsVisible] = useState(false);

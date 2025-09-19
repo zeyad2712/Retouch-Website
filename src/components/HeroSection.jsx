@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './HeroSection.css';
+import './css/HeroSection.css';
 
 const HeroSection = () => {
   const [conversionRate, setConversionRate] = useState(0);

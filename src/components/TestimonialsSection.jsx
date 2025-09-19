@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import './TestimonialsSection.css';
+import './css/TestimonialsSection.css';
 
 const TestimonialsSection = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);

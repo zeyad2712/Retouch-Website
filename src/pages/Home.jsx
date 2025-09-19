@@ -6,7 +6,7 @@ import OurImpactSection from '../components/OurImpactSection';
 import EventsSection from '../components/EventsSection';
 import TestimonialsSection from '../components/TestimonialsSection';
 import FAQSection from '../components/FAQSection';
-import './Home.css';
+import './css/Home.css';
 
 const Home = () => {
   return (

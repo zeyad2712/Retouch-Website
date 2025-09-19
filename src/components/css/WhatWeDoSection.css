@@ -39,11 +39,11 @@
   }
 }
 
-.section-title {
-  font-size: 3rem;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 1.5rem 0;
+.section-header .section-title {
+  font-size: 3rem !important;
+  font-weight: 600 !important;
+  color: #1a1a1a !important;
+  margin: 0 0 1.5rem 0 !important;
 }
 
 .section-description {

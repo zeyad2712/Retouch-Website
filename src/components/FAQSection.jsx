@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import './FAQSection.css';
+import './css/FAQSection.css';
 
 const FAQSection = () => {
   const [openIndex, setOpenIndex] = useState(0);
