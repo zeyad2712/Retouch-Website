@@ -1,0 +1,360 @@
+.our-impact-section {
+  background: #f8f9fa;
+  padding: 8rem 0;
+}
+
+.our-impact-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.impact-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.impact-left {
+  display: flex;
+  justify-content: center;
+}
+
+.impact-card {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 100%;
+  /* max-width: 450px; */
+  transform: rotate(-2deg);
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.impact-card.animate-in {
+  opacity: 1;
+  animation: cardEntrance 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes cardEntrance {
+  0% {
+    opacity: 0;
+    transform: rotate(-5deg) scale(0.9) translateY(30px);
+  }
+  50% {
+    transform: rotate(-1deg) scale(1.02) translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: rotate(-2deg) scale(1) translateY(0);
+  }
+}
+
+.impact-card-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  /* margin: 0 0 2rem 0; */
+  text-align: center;
+}
+
+.impact-metrics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.impact-metric-box {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.impact-metric-box.animate-in {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: metricBoxEntrance 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes metricBoxEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.clients-box {
+  background: #f8f9fa;
+}
+
+.experience-box {
+  background: #fff3cd;
+}
+
+.growth-box {
+  background: #fff3cd;
+  grid-column: 1;
+  /* max-width: 200px; */
+  /* margin: 0 auto; */
+}
+
+.impact-icon {
+  width: 40px;
+  height: 40px;
+  background: #FFD700;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0.75rem;
+  color: #1a1a1a;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.impact-metric-box.animate-in .impact-icon {
+  animation: iconGlow 0.8s ease-out 0.2s;
+}
+
+@keyframes iconGlow {
+  0% {
+    transform: scale(0.8);
+    box-shadow: 0 0 0 rgba(255, 215, 0, 0);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(255, 215, 0, 0);
+  }
+}
+
+.impact-metric-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.impact-number {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1;
+  margin: 0 0 0.25rem 0;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.impact-metric-box.animate-in .impact-number {
+  animation: numberGlow 0.8s ease-out 0.3s;
+}
+
+@keyframes numberGlow {
+  0% {
+    transform: scale(0.8);
+    text-shadow: 0 0 0 rgba(26, 26, 26, 0);
+  }
+  50% {
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(26, 26, 26, 0.3);
+  }
+  100% {
+    transform: scale(1);
+    text-shadow: 0 0 0 rgba(26, 26, 26, 0);
+  }
+}
+
+.impact-label {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+}
+
+.impact-decorations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.circle-1 {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background: rgba(255, 215, 0, 0.15);
+  border-radius: 50%;
+  top: -30px;
+  right: -30px;
+}
+
+.circle-2 {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 215, 0, 0.1);
+  border-radius: 50%;
+  bottom: -20px;
+  left: -20px;
+}
+
+
+.impact-right {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.impact-right.animate-in {
+  opacity: 1;
+  transform: translateX(0);
+  animation: rightSlideIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes rightSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.impact-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.impact-text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.impact-text p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #666;
+  margin: 0;
+}
+
+.learn-more-btn {
+  background: #FFD700;
+  color: #1a1a1a;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: fit-content;
+}
+
+.learn-more-btn:hover {
+  background: #000000;
+  color: #FFD633;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .impact-content {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .impact-title {
+    font-size: 2.5rem;
+  }
+  
+  .impact-left {
+    order: 2;
+  }
+  
+  .impact-right {
+    order: 1;
+    text-align: center;
+  }
+  
+  .learn-more-btn {
+    align-self: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .our-impact-section {
+    padding: 3rem 0;
+  }
+  
+  .our-impact-container {
+    padding: 0 1rem;
+  }
+  
+  .impact-title {
+    font-size: 2rem;
+  }
+  
+  .impact-card {
+    padding: 2rem;
+  }
+  
+  .impact-text p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .impact-title {
+    font-size: 1.75rem;
+  }
+  
+  .impact-card {
+    padding: 1.5rem;
+  }
+  
+  .impact-metrics {
+    gap: 1rem;
+  }
+  
+  .impact-icon {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .impact-number {
+    font-size: 1.5rem;
+  }
+}

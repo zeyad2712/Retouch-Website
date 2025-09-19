@@ -1,0 +1,16 @@
+.home-page {
+  width: 100%;
+}
+
+/* Ensure proper spacing between sections */
+.home-page > * {
+  margin: 0;
+}
+
+/* Remove any default margins that might interfere */
+.home-page h1,
+.home-page h2,
+.home-page h3,
+.home-page p {
+  margin: 0;
+}
