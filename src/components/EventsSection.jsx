@@ -1,9 +1,13 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import './css/EventsSection.css';
+import EventsForm from './EventsForm';
 
 const EventsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [animatedEvents, setAnimatedEvents] = useState([]);
+  const [showForm, setShowForm] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const sectionRef = useRef(null);
 
   // Intersection Observer to detect when section is in view
@@ -12,15 +16,14 @@ const EventsSection = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && !isVisible) {
-            console.log('EventsSection is now visible - starting animations');
             setIsVisible(true);
             animateEvents();
           }
         });
       },
-      { 
-        threshold: 0.2, 
-        rootMargin: '0px 0px -50px 0px' 
+      {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
       }
     );
 
@@ -37,15 +40,14 @@ const EventsSection = () => {
 
   // Animate events with staggered timing
   const animateEvents = () => {
-    console.log('Starting event animations...');
     const events = [0, 1, 2]; // Event indices
     events.forEach((index, i) => {
       setTimeout(() => {
-        console.log(`Animating event ${index}`);
         setAnimatedEvents(prev => [...prev, index]);
       }, i * 200); // 200ms delay between each event
     });
   };
+
   const events = [
     {
       title: "Digital Marketing Masterclass",
@@ -73,6 +75,16 @@ const EventsSection = () => {
     }
   ];
 
+  const handleJoinNow = (event) => {
+    setSelectedEvent(event);
+    setShowForm(true);
+  };
+
+  const handleCloseForm = () => {
+    setShowForm(false);
+    setSelectedEvent(null);
+  };
+
   return (
     <section className="events-section" ref={sectionRef}>
       <div className="events-container">
@@ -85,19 +97,14 @@ const EventsSection = () => {
 
         <div className="events-grid">
           {events.map((event, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className={`event-card ${animatedEvents.includes(index) ? 'animate-in' : ''}`}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <div className="event-header">
                 <div className="date-icon">
-                  {/* <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="date-icon">
-                    <path d="M8 2a6 6 0 1 0 0 12A6 6 0 0 0 8 2z" stroke="currentColor" strokeWidth="1.5" fill="none" />
-                    <path d="M8 5v3l2 2" stroke="currentColor" strokeWidth="1.5" />
-                  </svg>
-                  <span className="date-text">{event.date}</span> */}
-                  <i class="fa-solid fa-calendar-days"></i>
+                  <i className="fa-solid fa-calendar-days"></i>
                 </div>
                 <div className="attendees-info">
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="attendees-icon">
@@ -109,34 +116,80 @@ const EventsSection = () => {
               </div>
 
               <div className="event-content">
-                <h3 className="event-title">{event.title}</h3>
+                <h3 className="event-title text-white">{event.title}</h3>
                 <p className="event-description">{event.description}</p>
 
                 <div className="event-details">
                   <div className="event-detail">
-                    <i class="fa-solid fa-calendar-days"></i>
+                    <i className="fa-solid fa-calendar-days"></i>
                     <span>{event.date}</span>
                   </div>
                   <div className="event-detail">
-                    <i class="fa-solid fa-clock"></i>
+                    <i className="fa-solid fa-clock"></i>
                     <span>{event.time}</span>
                   </div>
                   <div className="event-detail">
-                    <i class="fa-solid fa-location-dot"></i>
+                    <i className="fa-solid fa-location-dot"></i>
                     <span>{event.type}</span>
                   </div>
                 </div>
               </div>
 
-              <button className="join-btn">Join Now</button>
+              <button className="join-btn" onClick={() => handleJoinNow(event)}>Join Now</button>
             </div>
           ))}
         </div>
 
         <div className={`view-all-container ${isVisible ? 'animate-in' : ''}`}>
-          <button className="view-all-btn">View All Events</button>
+          <Link to="/events">
+            <button className="view-all-btn">View All Events</button>
+          </Link>
         </div>
       </div>
+
+      {showForm && (
+        <div className="events-form-popup" style={{
+          position: 'fixed',
+          top: 0, left: 0, right: 0, bottom: 0,
+          background: 'rgba(0,0,0,0.5)',
+          zIndex: 1000,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <div style={{
+            background: '#fff',
+            borderRadius: '12px',
+            boxShadow: '0 8px 32px rgba(0,0,0,0.25)',
+            padding: '2rem',
+            minWidth: '320px',
+            maxWidth: '90vw',
+            position: 'relative'
+          }}>
+            <button
+              onClick={handleCloseForm}
+              style={{
+                position: 'absolute',
+                top: '1rem',
+                right: '1rem',
+                background: 'transparent',
+                border: 'none',
+                fontSize: '1.5rem',
+                cursor: 'pointer',
+                color: '#333'
+              }}
+              aria-label="Close"
+            >
+              &times;
+            </button>
+            <EventsForm
+              isOpen={showForm}
+              onClose={handleCloseForm}
+              eventTitle={selectedEvent ? selectedEvent.title : undefined}
+            />
+          </div>
+        </div>
+      )}
     </section>
   );
 };
